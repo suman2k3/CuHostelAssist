@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chandigarh University Hostel Assistant</title>
+  <link rel="icon" href="https://www.cuchd.in/images/favicon.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    /* Header styling */
+    header {
+      background-color: #a90101;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    header h1 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-left: 15px;
+    }
+
+    /* Hero section */
+    .hero-section {
+      background-image: url('https://www.cuchd.in/images/homepage-banner.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 250px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px 40px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .hero-overlay h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .hero-overlay p {
+      font-size: 16px;
+    }
+
+    main {
+      padding: 30px 20px;
+    }
+
+    .intro-card {
+      background-color: white;
+      border-left: 5px solid #a90101;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .intro-card h2 {
+      color: #a90101;
+      margin-bottom: 10px;
+    }
+
+    .intro-card p {
+      line-height: 1.6;
+      color: #444;
+    }
+
+    /* Chatbot styles */
+    .chat-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #a90101;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1001;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .chat-widget {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 320px;
+      max-height: 450px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    .chat-widget.active {
+      display: flex;
+    }
+
+    .chat-header {
+      background: #a90101;
+      color: #fff;
+      padding: 12px 15px;
+      font-size: 16px;
+      position: relative;
+    }
+
+    .chat-header .chat-close {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 10px 15px;
+      overflow-y: auto;
+      background: #f1f1f1;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .chat-messages .message.bot {
+      text-align: left;
+      background-color: #e6e6e6;
+      color: #333;
+      border-radius: 5px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .chat-messages .message.user {
+      text-align: right;
+      background-color: #a90101;
+      color: #fff;
+      border-radius: 5px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+    }
+
+    .chat-input-area {
+      padding: 10px 15px;
+      border-top: 1px solid #ccc;
+      background: #fff;
+    }
+
+    .chat-input-area input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .chat-widget {
+        width: 90%;
+        right: 5%;
+      }
+
+      .hero-overlay h2 {
+        font-size: 24px;
+      }
+
+      .hero-overlay p {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div style="display: flex; align-items: center;">
+      <img src="{{ url_for('static', filename='cu_logo.jpg') }}" alt="CU Logo" style="height: 50px; margin-right: 15px;">
+      <h1>Hostel Assistant – Chandigarh University</h1>
+    </div>
+  </header>  
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-overlay">
+      <h2>Welcome to CU Hostel Assistant</h2>
+      <p>Your smart assistant for NCT Boys Hostels, available 24/7!</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <div class="intro-card">
+      <h2>About Nek Chand Towers</h2>
+      <p>
+        Nek Chand Towers (NCT-1 to NCT-6) are the official Boys Hostels at Chandigarh University, situated on the backside of the campus in Rupnagar, Mohali, Punjab.
+        Each tower provides 4-seater rooms with facilities like mess, gym, laundry, and canteens. NCT-6 is specially reserved for international students.
+      </p>
+      <p>
+        The Hostel Director, Mr. Ashwani, sits in NCT-4 and oversees hostel-related operations. Use the chat below for quick information or assistance.
+      </p>
+    </div>
+  </main>
+
+  <!-- Chatbot -->
+  <div class="chat-toggle" id="chat-toggle">Chat</div>
+  <div class="chat-widget" id="chat-widget">
+    <div class="chat-header">
+      Hostel Assistant
+      <span class="chat-close" id="chat-close">&times;</span>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="message bot">
+        <strong>Welcome to Hostel Assistant Chat!</strong><br><br>
+        <strong>Please choose an option by entering a number (1–15):</strong><br>
+        <strong>1.</strong> Hostel General Information<br>
+        <strong>2.</strong> Events &amp; Notices<br>
+        <strong>3.</strong> Maintenance &amp; Service Requests<br>
+        <strong>4.</strong> Hostel Regulations &amp; Guidelines<br>
+        <strong>5.</strong> Emergency Contacts &amp; Procedures<br>
+        <strong>6.</strong> Mess and Cafeteria Information<br>
+        <strong>7.</strong> Room Allotment &amp; Accommodation<br>
+        <strong>8.</strong> Visitor Policies<br>
+        <strong>9.</strong> Student Welfare Support<br>
+        <strong>10.</strong> Health and Safety<br>
+        <strong>11.</strong> Roommate Guidelines<br>
+        <strong>12.</strong> Security &amp; Surveillance<br>
+        <strong>13.</strong> Hostel Payments &amp; Fees<br>
+        <strong>14.</strong> Hostel Feedback &amp; Complaints<br>
+        <strong>15.</strong> Other Inquiries
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chat-input" placeholder="Enter a number (1–15)..." autocomplete="off">
+    </div>
+  </div>
+
+  <!-- Chat Script -->
+  <script>
+    const chatToggle = document.getElementById('chat-toggle');
+    const chatWidget = document.getElementById('chat-widget');
+    const chatClose = document.getElementById('chat-close');
+    const chatInput = document.getElementById('chat-input');
+    const chatMessages = document.getElementById('chat-messages');
+
+    chatToggle.addEventListener('click', () => {
+      chatWidget.classList.toggle('active');
+    });
+
+    chatClose.addEventListener('click', () => {
+      chatWidget.classList.remove('active');
+    });
+
+    chatInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter' && chatInput.value.trim() !== "") {
+        let userText = chatInput.value.trim();
+        appendMessage('user', userText);
+        chatInput.value = "";
+        fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: userText })
+        })
+        .then(response => response.json())
+        .then(data => {
+          appendMessage('bot', data.reply || 'Sorry, something went wrong.');
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          appendMessage('bot', 'Error connecting to server.');
+        });
+      }
+    });
+
+    function appendMessage(sender, text) {
+      const messageDiv = document.createElement("div");
+      messageDiv.classList.add("message", sender);
+      if (sender === 'bot') {
+        messageDiv.innerHTML = text;
+      } else {
+        messageDiv.innerText = text;
+      }
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>
