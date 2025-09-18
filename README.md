@@ -61,7 +61,7 @@ Hostel Feedback & Complaints
 Other Inquiries
 
 👨‍💻 Author
-Pawan Kumar
+Suman kumar
 Computer Science (AI & ML)
 Chandigarh University
 
